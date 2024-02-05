@@ -1,0 +1,41 @@
+@import "./colors.scss";
+@import "../components/logIn/logIn.scss";
+@import "../sass/fonts.scss";
+
+body {
+  background-color: $color-primary-background;
+
+  #wrapper {
+    display: grid;
+    grid-template-columns: 40px auto 40px;
+    grid-template-rows: 40% 100%;
+    .navbar {
+      grid-row-start: 1;
+      grid-row-end: 2;
+      grid-column-start: 2;
+      grid-column-end: 3;
+
+      padding: 1rem;
+      background-color: $color-primary-navbar;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .logoIMG {
+        width: 70%; /* Bredden anpassas till förälderns bredd */
+        max-width: 200px; /* Maximal bredd för att undvika förvridning */
+        height: auto; /* Höjden anpassas proportionellt */
+        margin: 1rem;
+    }
+    }
+
+    .main {
+      grid-row-start: 2;
+      grid-row-end: 3;
+      grid-column-start: 2;
+      grid-column-end: 3;
+      /* background-color: hotpink; */
+    }
+  }
+}
