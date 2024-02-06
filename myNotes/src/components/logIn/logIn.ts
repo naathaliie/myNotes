@@ -19,15 +19,15 @@ export function logIn(){
     //Create the lable and the input
     const userNameLable: HTMLLabelElement = document.createElement('label');
     userNameLable.classList.add('userNameLable');
-    userNameLable.setAttribute('for', 'fname');
+    userNameLable.setAttribute('for', 'username');
     userNameLable.innerHTML = "Användarnamn";
     inputFormEl.appendChild(userNameLable);
 
     const userNameInput: HTMLInputElement = document.createElement('input');
     userNameInput.classList.add('userNameInput');
     userNameInput.setAttribute('type','text');
-    userNameInput.setAttribute('id','fname');
-    userNameInput.setAttribute('name','fname');
+    userNameInput.setAttribute('id','username');
+    userNameInput.setAttribute('name','username');
     userNameInput.setAttribute('placeholder', 'Skriv in ditt användarnamn...');
     inputFormEl.appendChild(userNameInput);
 

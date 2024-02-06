@@ -1,10 +1,13 @@
+@import "../sass/colors.scss";
+
 @mixin mainButton(){
     color: #fff;
-    background-color: rgb(141, 191, 179);
+    background-color: $color-primary-button;
     border-style: none;
-    box-shadow: 2px 2px 2px rgb(141, 191, 179, 40%);
+    box-shadow: 2px 2px 2px $color-primary-butto-shadow;
     border-radius: 4px;
     font-family: $font-poppins-bold;
-    width: 7rem;
+    width: auto;
+    max-width: 11rem;
     height: 1.5rem;
 };

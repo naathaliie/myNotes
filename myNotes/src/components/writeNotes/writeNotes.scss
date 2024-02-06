@@ -1,16 +1,56 @@
 @import "../../sass/buttons.scss";
 @import "../../sass/fonts.scss";
+@import "../../sass/colors.scss";
 
 .main {
   .writeNoteWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    
+
+
     .seePreviousButton {
       @include mainButton();
     }
 
     .noteBox {
+        background-color: whitesmoke;
+        border: 2px solid $color-primary-button;
+        border-radius: 4px;
+        min-width: 15rem;
+        min-height: 10rem;
+        padding: 3%;
+
+            .currentDate{
+                color: grey;
+                margin-bottom: 2%;
+                font-family: $font-poppins-bold;
+            }
+
+            .titleInput{
+             border-style: none;
+            }
+
+            .titleInput::placeholder{
+                font-family: $font-poppins-bold;
+                color: black;
+            }
+
+            .noteInput{
+                border-style: none; 
+                
+            }
+
+            .noteInput::placeholder{
+                font-family: $font-poppins-thinItalic;
+                font-style: italic;
+            }
     }
 
     .publishButton {
+        @include mainButton();
     }
   }
 }
