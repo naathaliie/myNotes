@@ -1,5 +1,3 @@
-import { API_GET } from "../../api/apiGET";
-import { Note } from "../../interfaces/interface";
 /*******ÄNDRA DATATYPEN ANY!!!********/
 export function seeNotes(username: string){
     console.log("Du är inne i seeNotes funktionen");

@@ -2,6 +2,7 @@ import { seeNotes } from "../seeNotes/seeNotes";
 import { Note } from "../../interfaces/interface";
 import { API_POST } from "../../api/apiPOST";
 
+
 /* 1: Skapa laouten för sidan. 
    2: Klickar man på knappen "Se tidigare anteckningar" skall användarnamnet följa med
    som parameter vid functionsanropet på "seeNotes" för att kunna visa alla anteckningar som användaren skrivit.
@@ -10,6 +11,7 @@ import { API_POST } from "../../api/apiPOST";
    sidan där den senast skapade anteckningar hamnar överst.*/
 
 export function writeNote(username: string){
+
     console.log("Du är inne i writeNote funktionen");
     
 
@@ -38,7 +40,9 @@ export function writeNote(username: string){
     //Create the div for the date
     const currentDate: HTMLDivElement = document.createElement('div');
     currentDate.classList.add('currentDate');
-    currentDate.innerHTML = 'Dagensdatum';
+    const currDate = new Date();
+    const formatedData = currDate.toLocaleDateString();
+    currentDate.innerHTML = formatedData;
     noteBox.appendChild(currentDate);
 
     //Create the inputfield for title
@@ -90,11 +94,12 @@ export function writeNote(username: string){
             username: username,
             title: titleInput.value,
             note: noteInput.value,
+            createdAt: currentDate.innerHTML,
         };
          
         //Functions we want to call
         API_POST(noteInfo);
-        seeNotes(username); 
+       /*  seeNotes(username); */ 
 
          /* To hide the writeNote "page":
         Since mainEl may be null or undefined (HTMLElement | null), we need to verify its existence 
