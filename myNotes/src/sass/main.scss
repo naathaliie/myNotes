@@ -1,6 +1,7 @@
 @import "./colors.scss";
-@import "../components/logIn/logIn.scss";
 @import "../sass/fonts.scss";
+@import "../components/logIn/logIn.scss";
+@import "../components/writeNotes/writeNotes.scss";
 
 body {
   background-color: $color-primary-background;
@@ -8,7 +9,7 @@ body {
   #wrapper {
     display: grid;
     grid-template-columns: 40px auto 40px;
-    grid-template-rows: 40% 100%;
+    grid-template-rows: 5rem 100%;
     .navbar {
       grid-row-start: 1;
       grid-row-end: 2;

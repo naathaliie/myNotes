@@ -1,5 +1,4 @@
 //Imports the function from logIn.ts
-
 import { logIn } from "./components/logIn/logIn";
 
 //creates the base layout

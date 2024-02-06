@@ -1,5 +1,7 @@
 @import "../../sass/fonts.scss";
+@import "../../sass/buttons.scss";
 .main {
+    display: block;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,13 +33,7 @@
         }
         
         .logInButton {
-        //Koden för knappen skall sedan sparas i en mixin så att vi bara anropar dess variabel här!
-        color: #fff;
-        background-color: rgb(141, 191, 179);
-        border-style: none;
-        box-shadow: 2px 2px 2px rgb(141, 191, 179, 40%);
-        border-radius: 4px;
-        font-family: $font-poppins-bold;
+            @include mainButton();
         }
     }
 }
