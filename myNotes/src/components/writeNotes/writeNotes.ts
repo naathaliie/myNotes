@@ -83,6 +83,7 @@ export function writeNote(username: string){
         This is because we want to avoid try to push anything "empty" to the API*/
         if (titleInput.value.trim() === '' || noteInput.value.trim() === '') {
             alert('Du måste fylla i en Titel och en Anteckning för att kunna publicera');
+            return; // The return; will throw you back before the if everytime you end up inside it (everytime either the titleinput or noteinput is empty)        
         }
         //Saves all the collected info from the user into a object with datatype of interface
        let noteInfo: Note ={
