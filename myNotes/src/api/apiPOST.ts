@@ -7,7 +7,7 @@ export async function API_POST(noteInfo: Note) {
     let postAPI = BASE_URL + '/api' + '/notes';
     
     //NOW finally we will try to post the things to the api
-    let respons = await fetch(postAPI, {
+    let response = await fetch(postAPI, {
         method: "POST",
         body: JSON.stringify(noteInfo), //Remakes it into a JSON-object
         headers: {
@@ -16,7 +16,10 @@ export async function API_POST(noteInfo: Note) {
 
     });
 
-    console.log("Du lyckades posta notisen, grattis", respons);
-    
+
 }
+
+    
+    
+
 

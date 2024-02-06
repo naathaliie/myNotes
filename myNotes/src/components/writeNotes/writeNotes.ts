@@ -93,7 +93,7 @@ export function writeNote(username: string){
          
         //Functions we want to call
         API_POST(noteInfo);
-        seeNotes(username);
+        seeNotes(username); 
 
          /* To hide the writeNote "page":
         Since mainEl may be null or undefined (HTMLElement | null), we need to verify its existence 

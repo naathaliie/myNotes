@@ -1,6 +1,6 @@
-export async function API_GET(){
+export async function API_GET(response: any){
     console.log('Du är inne i funktionen API_GET!');
 
-    return console.log('Det går att returnera');
+
     
 };

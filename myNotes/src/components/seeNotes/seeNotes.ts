@@ -1,10 +1,11 @@
 import { API_GET } from "../../api/apiGET";
-
+import { Note } from "../../interfaces/interface";
+/*******ÄNDRA DATATYPEN ANY!!!********/
 export function seeNotes(username: string){
     console.log("Du är inne i seeNotes funktionen");
     
    //When entering this side we want to call the function for getting the notes frpn the API
-   API_GET();
+   
 
     //Get access to the mainElement (created in main.ts)
     const mainEl: HTMLElement | null = document.querySelector('.main');
@@ -25,5 +26,7 @@ export function seeNotes(username: string){
     If ther is no notes, message = You dont have any notes
     If ther is notes, they should be displayed*/
     
-
+   /*  array.forEach(element => {
+        
+    }); */
 };
