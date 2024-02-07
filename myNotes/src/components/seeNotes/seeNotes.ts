@@ -1,10 +1,11 @@
+import { API_GET } from "../../api/apiGET";
+
 /*******ÄNDRA DATATYPEN ANY!!!********/
 export function seeNotes(username: string){
-    console.log("Du är inne i seeNotes funktionen");
+    console.log("Du är inne i seeNotes funktionen och här är användarnamnet: ", username);
     
-   //When entering this side we want to call the function for getting the notes frpn the API
-   
-
+   //When entering this side we want to call the function for getting the notes from the API with the username
+    API_GET(username);
     //Get access to the mainElement (created in main.ts)
     const mainEl: HTMLElement | null = document.querySelector('.main');
 

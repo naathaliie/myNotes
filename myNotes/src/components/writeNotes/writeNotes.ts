@@ -1,6 +1,7 @@
 import { seeNotes } from "../seeNotes/seeNotes";
 import { Note } from "../../interfaces/interface";
 import { API_POST } from "../../api/apiPOST";
+import { API_GET } from "../../api/apiGET";
 
 
 /* 1: Skapa laouten för sidan. 
@@ -89,17 +90,13 @@ export function writeNote(username: string){
             alert('Du måste fylla i en Titel och en Anteckning för att kunna publicera');
             return; // The return; will throw you back before the if everytime you end up inside it (everytime either the titleinput or noteinput is empty)        
         }
-        //Saves all the collected info from the user into a object with datatype of interface
+        //Saves all the collected info needed of the user into a object with datatype of interface Note
        let noteInfo: Note ={
             username: username,
             title: titleInput.value,
             note: noteInput.value,
-            createdAt: currentDate.innerHTML,
-        };
-         
-        //Functions we want to call
-        API_POST(noteInfo);
-       /*  seeNotes(username); */ 
+/*             createdAt: currentDate.innerHTML,
+ */        };
 
          /* To hide the writeNote "page":
         Since mainEl may be null or undefined (HTMLElement | null), we need to verify its existence 
@@ -109,6 +106,11 @@ export function writeNote(username: string){
             writeNoteWrapper.style.display = 'none';
         }
 
+            //Functions we want to call
+             API_POST(noteInfo); 
+             seeNotes(username);  
+/*             API_GET();
+ */
     });
 
 };

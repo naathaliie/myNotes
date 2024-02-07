@@ -5,5 +5,5 @@ export interface Note{
     username: string;
     title: string;
     note: string;
-    createdAt: string;
+    createdAt?: string;
 }
