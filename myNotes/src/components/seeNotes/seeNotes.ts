@@ -2,7 +2,7 @@ import { API_GET } from "../../api/apiGET";
 
 /*******ÄNDRA DATATYPEN ANY!!!********/
 export function seeNotes(username: string){
-    console.log("Du är inne i seeNotes funktionen och här är användarnamnet: ", username);
+    console.log("Du är inne i seeNotes funktionen");
     
    //When entering this side we want to call the function for getting the notes from the API with the username
     API_GET(username);
