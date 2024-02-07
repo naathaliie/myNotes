@@ -1,5 +1,7 @@
+import { API_DELETE } from "../../api/apiDELETE";
 import { API_GET } from "../../api/apiGET";
 import { Note } from "../../interfaces/interface";
+import { writeNote } from "../writeNotes/writeNotes";
 
 
 
@@ -49,7 +51,8 @@ export function seeNotes(username: string){
 
       //But if the user has published notes we will print them out one by one :)
 
-       notes.forEach((note: Note, i: number)=> {
+       notes.forEach((note: Note, i: number)=> {      
+
         //Create the noteSection
         const noteSection: HTMLElement = document.createElement('section');
         noteSection.classList.add(`noteDiv${i}`);
@@ -104,32 +107,50 @@ export function seeNotes(username: string){
          noteSection.appendChild(deleteButton);
 
 
-
-
-
-
-         
-         //When click on the backButton
-         backButton.addEventListener('click', () => {
-
-         });
-
          //When click on the updateButton
          updateNoteButton.addEventListener('click', () => {
 
          });
 
+
          //When click on the deleteButton
          deleteButton.addEventListener('click', () => {
+          console.log('Du klickade på deletknappen för note nr: ' + `${i}. ` + 'Med unikt id: ' + note.id);
+           //Call the API_DELETE function to delete the message
+           API_DELETE(note.id);
+           
+           seeNoteWrapper.remove();
+           seeNotes(username);
 
          });
        });
+
+
    })
    .catch(error => {
        console.error('Ett fel uppstod vid hämtning av anteckningar.');
    })
 
+//When click on the backButton to go back to seeNote page
+backButton.addEventListener('click', () => {
+         
+    //get access to the writeNoteWrapper
+    const writeNoteWrapper:HTMLDivElement = document.querySelector('.writeNoteWrapper');
 
+    if (writeNoteWrapper.style.display = "none") {
+       writeNoteWrapper.style.display = "block";
+     }
+
+     //To make the previous created elements disappear.
+     writeNoteWrapper.remove();
+       
+     //Makes the seeNoteWrapper "Dissappear"
+     seeNoteWrapper.style.display = "none";
+     
+     
+
+       writeNote(username);
+    });
    
    
 };

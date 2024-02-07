@@ -12,6 +12,7 @@ import { API_POST } from "../../api/apiPOST";
 export function writeNote(username: string) {
   console.log("Du är inne i writeNote funktionen");
 
+  
   //Get access to the mainElement (created in main.ts)
   const mainEl: HTMLElement | null = document.querySelector(".main");
 
