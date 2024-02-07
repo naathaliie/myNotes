@@ -55,8 +55,7 @@ export function seeNotes(username: string){
 
         //Create the noteSection
         const noteSection: HTMLElement = document.createElement('section');
-        noteSection.classList.add(`noteDiv${i}`);
-        noteSection.innerHTML = `box${i}`;
+        noteSection.classList.add("noteDiv", `${i}`);
         seeNoteWrapper.appendChild(noteSection);
 
         //Create the div for the date
@@ -67,7 +66,7 @@ export function seeNotes(username: string){
 
         //Create the div for the Title
         const theTitle: HTMLDivElement = document.createElement('div');
-        theTitle.classList.add('thTitle', `${i}`);
+        theTitle.classList.add('theTitle', `${i}`);
         theTitle.innerHTML = note.title;
         noteSection.appendChild(theTitle);
 
@@ -117,10 +116,27 @@ export function seeNotes(username: string){
          deleteButton.addEventListener('click', () => {
           console.log('Du klickade på deletknappen för note nr: ' + `${i}. ` + 'Med unikt id: ' + note.id);
            //Call the API_DELETE function to delete the message
-           API_DELETE(note.id);
            
-           seeNoteWrapper.remove();
-           seeNotes(username);
+          /* A confirmBox, if the user klicks ok it will be true if the user klicks avbryt it will be false */
+           const checkIfDelete = confirm('Är du säker på att du vill radera din anteckning?');
+            if (checkIfDelete) {
+                //The klicked note will be deleted
+                API_DELETE(note.id);
+                //We will reset the created elements
+                seeNoteWrapper.remove();
+              
+                //Set a timeout so the deleted note has a chanse of being deleted
+                setTimeout(() => {
+                    seeNotes(username) 
+                }, 300);
+                
+            } else {
+                return;
+            }
+
+        
+           
+           
 
          });
        });
