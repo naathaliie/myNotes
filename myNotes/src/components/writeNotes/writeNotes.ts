@@ -1,7 +1,6 @@
 import { seeNotes } from "../seeNotes/seeNotes";
 import { Note } from "../../interfaces/interface";
 import { API_POST } from "../../api/apiPOST";
-import { API_GET } from "../../api/apiGET";
 
 /* 1: Skapa laouten för sidan. 
    2: Klickar man på knappen "Se tidigare anteckningar" skall användarnamnet följa med
@@ -69,6 +68,14 @@ export function writeNote(username: string) {
 
   //When click on seePreviousButton
   seePreviousButton.addEventListener("click", async () => {
+   /* To hide the writeNote "page":
+        Since mainEl may be null or undefined (HTMLElement | null), we need to verify its existence 
+        before accessing its properties. Attempting to assign a value to a property of a null object 
+        will result in an error, thats why we need to check it with a if-statement */
+        if (mainEl !== null && mainEl !== undefined) {
+            writeNoteWrapper.style.display = "none";
+          }
+   
     seeNotes(username);
   });
 

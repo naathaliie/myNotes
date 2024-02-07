@@ -9,7 +9,7 @@ export async function API_GET(username: string){
     }
 
     const data = await response.json();
-    console.log('Detta är datan vi får ut', data);
-    
+/*      console.log('Detta är datan vi får ut', data.notes);
+ */      return await data.notes;
      
 };
