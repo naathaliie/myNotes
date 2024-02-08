@@ -7,6 +7,9 @@ import { writeNote } from "../writeNotes/writeNotes";
 export function seeNotes(username: string) {
   console.log("Du är inne i seeNotes funktionen");
 
+  //We need this to be global in this function
+  let noteID: string;
+
   //Get access to the mainElement (created in main.ts)
   const mainEl: HTMLElement | null = document.querySelector(".main");
 
@@ -104,7 +107,8 @@ export function seeNotes(username: string) {
         //When click on the updateButton
         updateNoteButton.addEventListener("click", () => {
           /* När man klickar på updateButton vill jag att en pop-up ruta med allt innehåll från den klickade anteckningen skall poppa upp */
-
+          console.log('du har klickat på updatebutton');
+          
           //Create the updateSection
           const updateSection: HTMLElement = document.createElement("section");
           updateSection.classList.add("updateSection", `${i}`);
@@ -179,9 +183,10 @@ export function seeNotes(username: string) {
             let updatedNote: updateNote = {
             note: updateNote.value,
             };
-            
+              //Adds it to the global variable of this function
+              noteID = note.id ?? 'Inget ID'; 
              //Sends the updatednote to the API
-             API_PUT(updatedNote, note.id);
+             API_PUT(updatedNote, noteID);
                    
              seeNoteWrapper.remove();
 
@@ -189,11 +194,6 @@ export function seeNotes(username: string) {
                 seeNotes(username);
               }, 300);
         });
-
-
-
-
-
 
         });
 
@@ -212,8 +212,11 @@ export function seeNotes(username: string) {
             "Är du säker på att du vill radera din anteckning?"
           );
           if (checkIfDelete) {
+
+            //Adds it to the global variable of this function
+            noteID = note.id ?? 'Inget ID'; 
             //The klicked note will be deleted
-            API_DELETE(note.id);
+            API_DELETE(noteID);
             //We will reset the created elements
             seeNoteWrapper.remove();
 
@@ -237,6 +240,7 @@ export function seeNotes(username: string) {
     const writeNoteWrapper: HTMLDivElement =
       document.querySelector(".writeNoteWrapper");
 
+      
     if ((writeNoteWrapper.style.display = "none")) {
       writeNoteWrapper.style.display = "block";
     }
