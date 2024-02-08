@@ -54,7 +54,8 @@ export function seeNotes(username: string) {
         //Create the div for the date
         const theDate: HTMLDivElement = document.createElement("div");
         theDate.classList.add("theDate", `${i}`);
-        theDate.innerHTML = note.createdAt?.toString();
+        // Here I use the nullish coalescing operator (??) to provide a default value to the variable 'theDate' if 'note.createdAt' is null or undefined.
+        theDate.textContent = note.createdAt?.toString() ?? 'Det finns inget datum';
         noteSection.appendChild(theDate);
 
         //Create the div for the Title
@@ -113,7 +114,7 @@ export function seeNotes(username: string) {
           //Create the div for the date
           const theDate: HTMLDivElement = document.createElement("div");
           theDate.classList.add("theDate", `${i}`);
-          theDate.innerHTML = note.createdAt?.toString();
+          theDate.textContent = note.createdAt?.toString() ?? '';
           updateSection.appendChild(theDate);
 
           //Create the div for the Title
