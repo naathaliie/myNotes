@@ -25,11 +25,6 @@ export function seeNotes(username: string) {
   seeNoteWrapper.appendChild(backButton);
   //Create the writeNewNoteButton
 
-  /*Create a container för every note from the api
-    Get access to the API
-    If ther is no notes, message = You dont have any notes
-    If ther is notes, they should be displayed*/
-
   /*When entering this side we want to call the function for getting the notes from the API with the username
    We need to use .then and .catch because when you are calling a async function (API_GET) you will receive a promise right away,
    .then waits for the operation to get fullfiled */
@@ -58,7 +53,8 @@ export function seeNotes(username: string) {
         const theDate: HTMLDivElement = document.createElement("div");
         theDate.classList.add("theDate", `${i}`);
         // Here I use the nullish coalescing operator (??) to provide a default value to the variable 'theDate' if 'note.createdAt' is null or undefined.
-        theDate.textContent = note.createdAt?.toString() ?? 'Det finns inget datum';
+        theDate.textContent =
+          note.createdAt?.toString() ?? "Det finns inget datum";
         noteSection.appendChild(theDate);
 
         //Create the div for the Title
@@ -104,11 +100,15 @@ export function seeNotes(username: string) {
         deleteButton.innerHTML = "Ta bort";
         noteSection.appendChild(deleteButton);
 
+
+
+        /*******************UPDATE BUTTON*****************UPDATE BUTTON******************UPDATE BUTTON****************UPDATE BUTTON********************************/
+
         //When click on the updateButton
         updateNoteButton.addEventListener("click", () => {
           /* När man klickar på updateButton vill jag att en pop-up ruta med allt innehåll från den klickade anteckningen skall poppa upp */
-          console.log('du har klickat på updatebutton');
-          
+          console.log("du har klickat på updatebutton");
+
           //Create the updateSection
           const updateSection: HTMLElement = document.createElement("section");
           updateSection.classList.add("updateSection", `${i}`);
@@ -118,7 +118,7 @@ export function seeNotes(username: string) {
           //Create the div for the date
           const theDate: HTMLDivElement = document.createElement("div");
           theDate.classList.add("theDate", `${i}`);
-          theDate.textContent = note.createdAt?.toString() ?? '';
+          theDate.textContent = note.createdAt?.toString() ?? "";
           updateSection.appendChild(theDate);
 
           //Create the div for the Title
@@ -171,31 +171,45 @@ export function seeNotes(username: string) {
           confirmButton.innerHTML = "Ok";
           updateSection.appendChild(confirmButton);
 
+
+          /***************************************************ABORT-CONFIRM BUTTON************************************************************/
           //Vad som skall hända när användaren klickar på avbryt
           abortButton.addEventListener("click", () => {
             updateSection.remove();
           });
 
+          /***************************************************ABORT-CONFIRM BUTTON************************************************************/
 
-            //Vad som skall hända när vi klickar på okknappen
-            confirmButton.addEventListener('click', () => {
-             //Saves all the collected info needed of the user into a object with datatype of interface Note
+
+
+
+
+          /***************************************************UPDATE-CONFIRM BUTTON************************************************************/
+          //Vad som skall hända när vi klickar på okknappen
+          confirmButton.addEventListener("click", () => {
+            //Saves all the collected info needed of the user into a object with datatype of interface Note
             let updatedNote: updateNote = {
-            note: updateNote.value,
+              note: updateNote.value,
             };
-              //Adds it to the global variable of this function
-              noteID = note.id ?? 'Inget ID'; 
-             //Sends the updatednote to the API
-             API_PUT(updatedNote, noteID);
-                   
-             seeNoteWrapper.remove();
+            //Adds it to the global variable of this function
+            noteID = note.id ?? "Inget ID";
+            //Sends the updatednote to the API
+            API_PUT(updatedNote, noteID);
 
-             setTimeout(() => {
-                seeNotes(username);
-              }, 300);
+            seeNoteWrapper.remove();
+
+            setTimeout(() => {
+              seeNotes(username);
+            }, 300);
+          });
+          /***************************************************UPDATE-CONFIRM BUTTON************************************************************/
+
         });
 
-        });
+/*******************UPDATE BUTTON*****************UPDATE BUTTON******************UPDATE BUTTON****************UPDATE BUTTON********************************/
+
+
+/*******************DELETE BUTTON*****************DELETE BUTTON******************DELETE BUTTON****************DELETE BUTTON********************************/
 
         //When click on the deleteButton
         deleteButton.addEventListener("click", () => {
@@ -212,9 +226,8 @@ export function seeNotes(username: string) {
             "Är du säker på att du vill radera din anteckning?"
           );
           if (checkIfDelete) {
-
             //Adds it to the global variable of this function
-            noteID = note.id ?? 'Inget ID'; 
+            noteID = note.id ?? "Inget ID";
             //The klicked note will be deleted
             API_DELETE(noteID);
             //We will reset the created elements
@@ -228,11 +241,16 @@ export function seeNotes(username: string) {
             return;
           }
         });
+
+/*******************DELETE BUTTON*****************DELETE BUTTON******************DELETE BUTTON****************DELETE BUTTON********************************/
+
       });
     })
     .catch((error) => {
       console.error("Ett fel uppstod vid hämtning av anteckningar.");
     });
+
+/*******************GO-BACK BUTTON*****************GO-BACK  BUTTON******************GO-BACK  BUTTON****************GO-BACK  BUTTON***************************/
 
   //When click on the backButton to go back to seeNote page
   backButton.addEventListener("click", () => {
@@ -240,7 +258,6 @@ export function seeNotes(username: string) {
     const writeNoteWrapper: HTMLDivElement =
       document.querySelector(".writeNoteWrapper");
 
-      
     if ((writeNoteWrapper.style.display = "none")) {
       writeNoteWrapper.style.display = "block";
     }
@@ -253,4 +270,7 @@ export function seeNotes(username: string) {
 
     writeNote(username);
   });
+
+  /*******************GO-BACK BUTTON*****************GO-BACK  BUTTON******************GO-BACK  BUTTON****************GO-BACK  BUTTON***************************/
+
 }

@@ -21,6 +21,12 @@ export function writeNote(username: string) {
   writeNoteWrapper.classList.add("writeNoteWrapper");
   mainEl?.appendChild(writeNoteWrapper);
 
+  //Create the exit Button
+  const exitButton: HTMLButtonElement = document.createElement("button");
+  exitButton.classList.add("exitButton");
+  exitButton.innerHTML = "Logga ut";
+  writeNoteWrapper?.appendChild(exitButton);
+
   //Create the seePrevious Button
   const seePreviousButton: HTMLButtonElement = document.createElement("button");
   seePreviousButton.classList.add("seePreviousButton");
@@ -66,6 +72,13 @@ export function writeNote(username: string) {
   publishButton.classList.add("publishButton");
   publishButton.innerHTML = "Publicera";
   writeNoteWrapper?.appendChild(publishButton);
+
+//when click on exitButton
+exitButton.addEventListener("click", () => {
+
+  location.reload();
+});
+
 
   //When click on seePreviousButton
   seePreviousButton.addEventListener("click", async () => {
