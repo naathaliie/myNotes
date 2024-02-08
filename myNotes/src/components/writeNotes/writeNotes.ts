@@ -102,8 +102,8 @@ export function writeNote(username: string) {
       username: username,
       title: titleInput.value,
       note: noteInput.value,
-      /*             createdAt: currentDate.innerHTML,
-       */
+      /* createdAt: currentDate.innerHTML, */ //VARFÖR FUNGERAR DET INTE??? FINNS ÄVEN I SEENOTES NÄR MAN UPPDATERAR
+       
     };
 
     //Functions we want to call
