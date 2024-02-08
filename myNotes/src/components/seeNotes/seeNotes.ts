@@ -108,6 +108,15 @@ export function seeNotes(username: string){
 
          //When click on the updateButton
          updateNoteButton.addEventListener('click', () => {
+            /* När man klickar på updateButton vill jag att en pop-up ruta med allt innehåll från den klickade anteckningen skall poppa upp */
+
+             //Create the updateSection
+            const updateSection: HTMLElement = document.createElement('section');
+            updateSection.classList.add("updateSection", `${i}`);
+            updateSection.innerHTML = 'Du vill uppdatera mig med unikt id: ' + note.id;
+            seeNoteWrapper.appendChild(updateSection);
+
+            
 
          });
 
