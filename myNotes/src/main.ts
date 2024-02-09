@@ -1,7 +1,7 @@
 //Imports the function from logIn.ts
 import { logIn } from "./components/logIn/logIn";
 
-//creates the base layout
+//creates the base-layout
 function baseLayout() {
   //Gets access to the only element in the index.html
   const wrapperEl: HTMLElement | null = document.getElementById("wrapper");
@@ -15,12 +15,13 @@ function baseLayout() {
   logoImgEl.src = "./src/img/Title.png";
   navEl.appendChild(logoImgEl);
 
-  //creates the Main
+  //creates the MainElement
   const mainEl: HTMLElement = document.createElement("main");
   mainEl.classList.add("main");
   wrapperEl?.appendChild(mainEl);
 
-logIn();
+  //The login-layout gets called automatically
+logIn(); 
 }
-
+//The base-layout gets called automatically
 baseLayout();

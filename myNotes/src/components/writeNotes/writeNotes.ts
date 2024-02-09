@@ -2,17 +2,8 @@ import { seeNotes } from "../seeNotes/seeNotes";
 import { Note } from "../../interfaces/interface";
 import { API_POST } from "../../api/apiPOST";
 
-/* 1: Skapa laouten för sidan. 
-   2: Klickar man på knappen "Se tidigare anteckningar" skall användarnamnet följa med
-   som parameter vid functionsanropet på "seeNotes" för att kunna visa alla anteckningar som användaren skrivit.
-   Har användaren inte skrivit några så????
-   3: Klickar användaren på knappen publicera skall anteckningen pushas till APIet och användaren skall hamna på seeNotes
-   sidan där den senast skapade anteckningar hamnar överst.*/
-
+/*The writeNote-layout*/
 export function writeNote(username: string) {
-  console.log("Du är inne i writeNote funktionen");
-
-  
   //Get access to the mainElement (created in main.ts)
   const mainEl: HTMLElement | null = document.querySelector(".main");
 
@@ -21,11 +12,16 @@ export function writeNote(username: string) {
   writeNoteWrapper.classList.add("writeNoteWrapper");
   mainEl?.appendChild(writeNoteWrapper);
 
-  //Create the exit Button
+  //Create the exitButton
   const exitButton: HTMLButtonElement = document.createElement("button");
   exitButton.classList.add("exitButton");
   exitButton.innerHTML = "Logga ut";
   writeNoteWrapper?.appendChild(exitButton);
+
+  //when click on exitButton
+  exitButton.addEventListener("click", () => {
+    location.reload();
+  });
 
   //Create the seePrevious Button
   const seePreviousButton: HTMLButtonElement = document.createElement("button");
@@ -58,39 +54,34 @@ export function writeNote(username: string) {
   titleInput.setAttribute("placeholder", "Min anteckning");
   noteBox.appendChild(titleInput);
 
-  //Create the inpurfield for the note
-  const noteInput: HTMLInputElement = document.createElement("input");
+  //Create the inputfield for the note
+  const noteInput: HTMLTextAreaElement = document.createElement("textarea");
   noteInput.classList.add("noteInput");
-  noteInput.setAttribute("type", "text");
   noteInput.setAttribute("id", "noteInput");
   noteInput.setAttribute("name", "noteInput");
+  noteInput.setAttribute("rows", "10");
+  noteInput.setAttribute("cols", "50");
   noteInput.setAttribute("placeholder", "Vad vill du skriva om idag...");
   noteBox.appendChild(noteInput);
 
-  //Create the publish Button
+  //Create the publishButton
   const publishButton: HTMLButtonElement = document.createElement("button");
   publishButton.classList.add("publishButton");
   publishButton.innerHTML = "Publicera";
   writeNoteWrapper?.appendChild(publishButton);
 
-//when click on exitButton
-exitButton.addEventListener("click", () => {
-
-  location.reload();
-});
-
 
   //When click on seePreviousButton
   seePreviousButton.addEventListener("click", async () => {
-   /* To hide the writeNote "page":
+    /* To hide the writeNote "page":
         Since mainEl may be null or undefined (HTMLElement | null), we need to verify its existence 
         before accessing its properties. Attempting to assign a value to a property of a null object 
         will result in an error, thats why we need to check it with a if-statement */
-        if (mainEl !== null && mainEl !== undefined) {
-            writeNoteWrapper.style.display = "none";
-          }
-   
-          /* writeNoteWrapper.remove(); */
+    if (mainEl !== null && mainEl !== undefined) {
+      writeNoteWrapper.style.display = "none";
+    }
+
+    /* writeNoteWrapper.remove(); */
 
     seeNotes(username);
   });
@@ -118,11 +109,13 @@ exitButton.addEventListener("click", () => {
       title: titleInput.value,
       note: noteInput.value,
       /* createdAt: currentDate.innerHTML, */ //VARFÖR FUNGERAR DET INTE??? FINNS ÄVEN I SEENOTES NÄR MAN UPPDATERAR
-       
     };
 
     //Functions we want to call
     API_POST(noteInfo); //Sends the note to the API
+
+    //The publishButton will dissappear
+    publishButton.remove();
 
     //knapp för att se sina notes
 
@@ -139,8 +132,8 @@ exitButton.addEventListener("click", () => {
       if (mainEl !== null && mainEl !== undefined) {
         writeNoteWrapper.style.display = "none";
       }
-      
-        seeNotes(username); //goes to the seenotes page
+
+      seeNotes(username); //goes to the seenotes page
     });
   });
 }

@@ -1,39 +1,40 @@
 @import "../../sass/fonts.scss";
 @import "../../sass/buttons.scss";
+
 .main {
-    display: block;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .mainWrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 
-        .inputForm {
-        display: flex;
-        flex-direction: column;
+    .inputForm {
+      display: flex;
+      flex-direction: column;
 
-            .userNameLable {
-                font-family: $font-poppins-bold;
-            }
+      .userNameLable {
+        font-family: $font-poppins-bold;
+      }
 
-            .userNameInput {
-                font-family: $font-poppins-bold;   
-            }
-            .userNameInput::placeholder{
-                font-family: $font-poppins-thinItalic;
-                font-style: italic;
-                font-size: smaller;
-                color: lightgray;
-            }
-        }
-        
-        .logInButton {
-            @include mainButton();
-        }
+      .userNameInput {
+        font-family: $font-poppins-bold;
+      }
+      .userNameInput::placeholder {
+        font-family: $font-poppins-thinItalic;
+        font-style: italic;
+        font-size: smaller;
+        color: lightgray;
+      }
     }
+
+    .logInButton {
+      @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow);
+    }
+  }
 }

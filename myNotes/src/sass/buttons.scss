@@ -1,13 +1,40 @@
 @import "../sass/colors.scss";
 
-@mixin mainButton(){
+/* A mixin for the mainbuttons
+Since a created the backgroundcolor and shadowcolor as variables you can choose what color you want to use
+The useHoverEffect is a boolean that is false as defaul. If we want a button to have a hover effect we just set it to true*/
+@mixin mainButton($backgroundColor, $shadowColor, $useHoverEffect: false){
     color: #fff;
-    background-color: $color-primary-button;
+    background-color: $backgroundColor;
     border-style: none;
-    box-shadow: 2px 2px 2px $color-primary-butto-shadow;
+    box-shadow: 2px 2px 2px $shadowColor;
     border-radius: 4px;
     font-family: $font-poppins-bold;
     width: auto;
     max-width: 11rem;
     height: 1.5rem;
+    cursor: pointer;
+
+    @keyframes slidebg {
+        to {
+          background-position:20vw;
+        }
+      }
+      
+      .follow{
+        margin-top: 40px;
+      }
+      
+      .follow a{
+        color: hotpink;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+
+    @if $useHoverEffect{
+        &:hover{
+            background-image: linear-gradient(to right, rgba(253, 171, 228, 0.74), rgb(223, 205, 173), rgb(239, 239, 186), rgb(204, 231, 204), rgb(181, 181, 244), rgb(216, 181, 241), rgb(242, 164, 211));
+            animation:slidebg 8s linear infinite;
+        }
+    }
 };

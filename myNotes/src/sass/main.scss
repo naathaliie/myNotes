@@ -25,11 +25,11 @@ body {
       justify-content: center;
 
       .logoIMG {
-        width: 70%; /* Bredden anpassas till förälderns bredd */
-        max-width: 200px; /* Maximal bredd för att undvika förvridning */
-        height: auto; /* Höjden anpassas proportionellt */
+        width: 70%; /* With adjustet to parents width */
+        max-width: 200px;
+        height: auto; /* Height is adjusted proportionatly */
         margin: 1rem;
-    }
+      }
     }
 
     .main {
@@ -37,7 +37,6 @@ body {
       grid-row-end: 3;
       grid-column-start: 2;
       grid-column-end: 3;
-      /* background-color: hotpink; */
     }
   }
 }

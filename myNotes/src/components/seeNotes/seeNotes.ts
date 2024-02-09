@@ -35,6 +35,26 @@ export function seeNotes(username: string) {
   thePenSymbol.src = "./src/img/Vector.png";
   writeNewButton.appendChild(thePenSymbol);
 
+  //When writeNewButton gets clicked
+  writeNewButton.addEventListener('click', () => {
+    
+      //get access to the writeNoteWrapper
+      const writeNoteWrapper: HTMLDivElement =
+        document.querySelector(".writeNoteWrapper");
+  
+      if ((writeNoteWrapper.style.display = "none")) {
+        writeNoteWrapper.style.display = "block";
+      }
+  
+      //To make the previous created elements disappear and to avoid stacking them on top of each other.
+      writeNoteWrapper.remove();
+      seeNoteWrapper.remove();
+  
+      //Makes the seeNoteWrapper "Dissappear"
+      seeNoteWrapper.style.display = "none";
+  
+      writeNote(username);
+  });
 
   /*When entering this side we want to call the function for getting the notes from the API with the username
    We need to use .then and .catch because when you are calling a async function (API_GET) you will receive a promise right away,
@@ -139,11 +159,12 @@ export function seeNotes(username: string) {
           updateSection.appendChild(updateTitle);
 
           //Create the div for the note
-          const updateNote: HTMLInputElement = document.createElement("input");
+          const updateNote: HTMLTextAreaElement = document.createElement("textarea");
           updateNote.classList.add("updateNote", `${i}`);
-          updateNote.setAttribute("type", "text");
           updateNote.setAttribute("id", "updateNote");
           updateNote.setAttribute("name", "updateNote");
+          updateNote.setAttribute("rows", "10");
+          updateNote.setAttribute("cols", "50");
           updateNote.setAttribute("placeholder", note.note);
           updateSection.appendChild(updateNote);
 
@@ -208,7 +229,7 @@ export function seeNotes(username: string) {
 
             setTimeout(() => {
               seeNotes(username);
-            }, 300);
+            }, 800);
           });
           /***************************************************UPDATE-CONFIRM BUTTON************************************************************/
 
@@ -244,7 +265,7 @@ export function seeNotes(username: string) {
             //Set a timeout so the deleted note has a chanse of being deleted
             setTimeout(() => {
               seeNotes(username);
-            }, 300);
+            }, 800);
           } else {
             return;
           }

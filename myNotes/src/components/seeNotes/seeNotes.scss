@@ -11,7 +11,7 @@
     margin: 2rem;
 
     .backButton{
-      @include mainButton();
+      @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);
     }
 
     .writeNewButton {
@@ -33,13 +33,13 @@
       }
     }
     .writeNewButton:hover {
-      background-color: $color-primary-button;
+      background-color: $color-primary-aquaGreen;
     }
 
    
     .noteSection {
       background-color: rgba(245, 245, 245, 0.373);
-      border: 2px solid $color-primary-button;
+      border: 2px solid $color-primary-aquaGreen;
       border-radius: 4px;
       min-width: 26rem;
       min-height: 10rem;
@@ -78,11 +78,20 @@
           font-family: $font-ooohBaby-regular;
         }
       }
+
+      .updateNoteButton{
+        @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);
+        margin-right: 1rem;
+      } 
+
+      .deleteButton{
+        @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);
+      } 
     }
 
     .updateSection {
       background-color: rgb(245, 245, 245);
-      border: 2px solid $color-primary-button;
+      border: 2px solid $color-primary-aquaGreen;
       border-radius: 4px;
       min-width: 15rem;
       min-height: 10rem;
@@ -121,6 +130,17 @@
           font-family: $font-ooohBaby-regular;
         }
       }
+
+      .abortButton{
+        @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);
+        margin-right: 1rem;
+      } 
+
+      .confirmButton{
+        @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);
+      } 
+
     }
   }
 }
+
