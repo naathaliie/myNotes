@@ -90,6 +90,8 @@ exitButton.addEventListener("click", () => {
             writeNoteWrapper.style.display = "none";
           }
    
+          /* writeNoteWrapper.remove(); */
+
     seeNotes(username);
   });
 

@@ -23,7 +23,18 @@ export function seeNotes(username: string) {
   backButton.classList.add("backButton");
   backButton.innerHTML = "Tillbaka";
   seeNoteWrapper.appendChild(backButton);
+
   //Create the writeNewNoteButton
+  const writeNewButton: HTMLDivElement = document.createElement("div");
+  writeNewButton.classList.add("writeNewButton");
+  seeNoteWrapper.appendChild(writeNewButton);
+  //The img för the writeNewButton
+  const thePenSymbol: HTMLImageElement =
+  document.createElement("img");
+  thePenSymbol.classList.add("thePenSymbol");
+  thePenSymbol.src = "./src/img/Vector.png";
+  writeNewButton.appendChild(thePenSymbol);
+
 
   /*When entering this side we want to call the function for getting the notes from the API with the username
    We need to use .then and .catch because when you are calling a async function (API_GET) you will receive a promise right away,
@@ -46,7 +57,7 @@ export function seeNotes(username: string) {
       notes.forEach((note: Note, i: number) => {
         //Create the noteSection
         const noteSection: HTMLElement = document.createElement("section");
-        noteSection.classList.add("noteDiv", `${i}`);
+        noteSection.classList.add("noteSection", `${i}`);
         seeNoteWrapper.appendChild(noteSection);
 
         //Create the div for the date
@@ -122,12 +133,9 @@ export function seeNotes(username: string) {
           updateSection.appendChild(theDate);
 
           //Create the div for the Title
-          const updateTitle: HTMLInputElement = document.createElement("input");
+          const updateTitle: HTMLDivElement = document.createElement("div");
           updateTitle.classList.add("updateTitle", `${i}`);
-          updateTitle.setAttribute("type", "text");
-          updateTitle.setAttribute("id", "updateTitle");
-          updateTitle.setAttribute("name", "updateTitle");
-          updateTitle.setAttribute("placeholder", note.title);
+          updateTitle.innerHTML = note.title;
           updateSection.appendChild(updateTitle);
 
           //Create the div for the note
@@ -262,8 +270,9 @@ export function seeNotes(username: string) {
       writeNoteWrapper.style.display = "block";
     }
 
-    //To make the previous created elements disappear.
+    //To make the previous created elements disappear and to avoid stacking them on top of each other.
     writeNoteWrapper.remove();
+    seeNoteWrapper.remove();
 
     //Makes the seeNoteWrapper "Dissappear"
     seeNoteWrapper.style.display = "none";

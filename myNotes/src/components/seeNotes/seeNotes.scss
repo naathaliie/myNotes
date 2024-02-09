@@ -2,66 +2,125 @@
 @import "../../sass/fonts.scss";
 @import "../../sass/colors.scss";
 
-.main{
+.main {
+  .seeNoteWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem;
 
-    .seeNoteWrapper{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-
-           .noteDiv{
-            background-color: rgba(245, 245, 245, 0.373);
-            border: 2px solid $color-primary-button;
-            border-radius: 4px;
-            min-width: 15rem;
-            min-height: 10rem;
-            padding: 3%;
-            margin-bottom: 3rem;
-         
-               .theDate{
-                color: rgba(163, 162, 162, 0.358);
-                margin-bottom: 2%;
-                font-family: $font-poppins-thinItalic;
-                font-size: small;
-                font-style: italic;
-               }
-
-               .theTitle{
-                font-family: $font-poppins-bold;
-                margin-bottom: 0.5rem;
-               }
-
-               .signatureDivBox{
-                display: flex;
-                align-items: center;
-                gap: 0.3rem;
-                margin: 1rem 1rem 1rem 0rem;
-
-                  .theHeartSymbol{
-                    max-width: 1rem;
-                    max-height: 1rem;
-                  }
-
-                  .theUsername{
-                    font-family: $font-ooohBaby-regular;
-                  }
-               }
-           }
-
-           .updateSection{
-            background-color: rgb(245, 245, 245);
-            border: 2px solid $color-primary-button;
-            border-radius: 4px;
-            min-width: 15rem;
-            min-height: 10rem;
-            padding: 3%;
-            margin-bottom: 3rem;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            
-           }
+    .backButton{
+      @include mainButton();
     }
+
+    .writeNewButton {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 5%;
+      background-color: $color-primary-butto-shadow;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 90%;
+      left: 70%;
+      transform: translate(-50%, -50%);
+
+      .thePenSymbol {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+    .writeNewButton:hover {
+      background-color: $color-primary-button;
+    }
+
+   
+    .noteSection {
+      background-color: rgba(245, 245, 245, 0.373);
+      border: 2px solid $color-primary-button;
+      border-radius: 4px;
+      min-width: 26rem;
+      min-height: 10rem;
+      padding: 3%;
+      margin-bottom: 3rem;
+
+      .theDate {
+        color: rgba(163, 162, 162, 0.358);
+        margin-bottom: 2%;
+        font-family: $font-poppins-thinItalic;
+        font-size: small;
+        font-style: italic;
+      }
+
+      .theTitle {
+        font-family: $font-poppins-bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .theNote {
+        font-family: $font-poppins-bold;
+      }
+
+      .signatureDivBox {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin: 1rem 1rem 1rem 0rem;
+
+        .theHeartSymbol {
+          max-width: 1rem;
+          max-height: 1rem;
+        }
+
+        .theUsername {
+          font-family: $font-ooohBaby-regular;
+        }
+      }
+    }
+
+    .updateSection {
+      background-color: rgb(245, 245, 245);
+      border: 2px solid $color-primary-button;
+      border-radius: 4px;
+      min-width: 15rem;
+      min-height: 10rem;
+      padding: 3%;
+      margin-bottom: 3rem;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      .theDate {
+        color: rgba(163, 162, 162, 0.358);
+        margin-bottom: 2%;
+        font-family: $font-poppins-thinItalic;
+        font-size: small;
+        font-style: italic;
+      }
+
+      .updateTitle {
+        font-family: $font-poppins-bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .signatureDivBox {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin: 1rem 1rem 1rem 0rem;
+
+        .theHeartSymbol {
+          max-width: 1rem;
+          max-height: 1rem;
+        }
+
+        .theUsername {
+          font-family: $font-ooohBaby-regular;
+        }
+      }
+    }
+  }
 }
