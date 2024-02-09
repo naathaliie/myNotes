@@ -15,10 +15,7 @@
     }
 
     .writeNewButton {
-      width: 5rem;
-      height: 5rem;
-      border-radius: 5%;
-      background-color: $color-primary-butto-shadow;
+      @include writeNewButton();
       display: flex;
       align-items: center;
       justify-content: center;
@@ -47,20 +44,17 @@
       margin-bottom: 3rem;
 
       .theDate {
-        color: rgba(163, 162, 162, 0.358);
+        @include fontDate();
         margin-bottom: 2%;
-        font-family: $font-poppins-thinItalic;
-        font-size: small;
-        font-style: italic;
       }
 
       .theTitle {
-        font-family: $font-poppins-bold;
+        @include fontTitleInput();
         margin-bottom: 0.5rem;
       }
 
       .theNote {
-        font-family: $font-poppins-bold;
+        @include fontNote();
       }
 
       .signatureDivBox {
@@ -76,6 +70,7 @@
 
         .theUsername {
           font-family: $font-ooohBaby-regular;
+          font-size: 25px;
         }
       }
 /**********THE UPDATE SECTION**********/
@@ -104,16 +99,22 @@
       transform: translate(-50%, -50%);
 
       .theDate {
-        color: rgba(163, 162, 162, 0.358);
+        @include fontDate();
         margin-bottom: 2%;
-        font-family: $font-poppins-thinItalic;
-        font-size: small;
-        font-style: italic;
+        
       }
 
       .updateTitle {
-        font-family: $font-poppins-bold;
+        @include fontTitleInput();
         margin-bottom: 0.5rem;
+      }
+
+      .updateNote{
+        @include fontNote();
+      }
+
+      .updateNote::placeholder{
+        @include fontNoteInput();
       }
 
       .signatureDivBox {
@@ -129,6 +130,7 @@
 
         .theUsername {
           font-family: $font-ooohBaby-regular;
+          font-size: 25px;
         }
       }
 

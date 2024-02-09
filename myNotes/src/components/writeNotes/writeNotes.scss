@@ -29,30 +29,32 @@
       min-width: 15rem;
       min-height: 10rem;
       padding: 3%;
+      
 
       .currentDate {
-        color: grey;
-        margin-bottom: 2%;
-        font-family: $font-poppins-bold;
+        @include fontDate();
+        margin-bottom: 0.5rem;
       }
 
       .titleInput {
-        border-style: none;
-        margin-bottom: 0.3rem;
+        @include fontTitleInput();
+        border-color: $color-primary-aquaGreen;
+        margin-bottom: 1rem;
+      
       }
 
       .titleInput::placeholder {
-        font-family: $font-poppins-bold;
-        color: black;
+        @include fontTitle();
+        
       }
 
       .noteInput {
+        @include fontNote();
         border-color: $color-primary-aquaGreen;
       }
 
       .noteInput::placeholder {
-        font-family: $font-poppins-thinItalic;
-        font-style: italic;
+        @include fontNoteInput();
       }
     }
 

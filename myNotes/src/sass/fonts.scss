@@ -7,3 +7,46 @@ $font-poppins-regular: 'Poppins Regular', sans-serif ;
 $font-poppins-thinItalic: 'Poppins Thin Italic', sans-serif;
 $font-ooohBaby-regular: 'Oooh Baby', cursive;
 
+
+@mixin fontStyle1(){
+font-family: $font-poppins-bold;
+font-size: 30px;
+};
+
+@mixin fontstyleInput (){
+    font-family: $font-poppins-regular;
+    color: $color-input-greyPink;
+};
+
+@mixin fontDate (){
+    font-family: $font-poppins-regular;
+    color: $color-primary-grey;
+    font-size: 20px;
+};
+
+@mixin fontTitle (){
+    font-family: $font-poppins-bold;
+    font-style: italic;
+    color: $color-primary-black;
+    font-size: 30px;
+};
+
+@mixin fontTitleInput (){
+    font-family: $font-poppins-bold;
+    color: $color-primary-black;
+    font-size: 30px;
+};
+
+@mixin fontNoteInput (){
+    font-family: $font-poppins-bold;
+    color: $color-primary-black;
+    font-style: italic;
+    font-size: 25px;
+};
+
+@mixin fontNote (){
+    font-family: $font-poppins-bold;
+    color: $color-primary-black;
+    font-size: 25px;
+};
+

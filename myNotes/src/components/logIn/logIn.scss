@@ -8,6 +8,7 @@
   justify-content: center;
 
   .mainWrapper {
+ 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,17 +20,14 @@
       flex-direction: column;
 
       .userNameLable {
-        font-family: $font-poppins-bold;
+        @include fontStyle1();
       }
 
       .userNameInput {
         font-family: $font-poppins-bold;
       }
       .userNameInput::placeholder {
-        font-family: $font-poppins-thinItalic;
-        font-style: italic;
-        font-size: smaller;
-        color: lightgray;
+        @include fontstyleInput();
       }
     }
 

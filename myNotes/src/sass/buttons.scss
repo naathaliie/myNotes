@@ -1,8 +1,6 @@
 @import "../sass/colors.scss";
 
-/* A mixin for the mainbuttons
-Since a created the backgroundcolor and shadowcolor as variables you can choose what color you want to use
-The useHoverEffect is a boolean that is false as defaul. If we want a button to have a hover effect we just set it to true*/
+/* A mixin for the mainbuttons*/
 @mixin mainButton($backgroundColor, $shadowColor, $useHoverEffect: false){
     color: #fff;
     background-color: $backgroundColor;
@@ -11,8 +9,8 @@ The useHoverEffect is a boolean that is false as defaul. If we want a button to 
     border-radius: 4px;
     font-family: $font-poppins-bold;
     width: auto;
-    max-width: 11rem;
-    height: 1.5rem;
+    min-width: 7rem;
+    height: 2rem;
     cursor: pointer;
 
     @keyframes slidebg {
@@ -37,4 +35,13 @@ The useHoverEffect is a boolean that is false as defaul. If we want a button to 
             animation:slidebg 8s linear infinite;
         }
     }
+};
+
+//I use this as a button even tho it´s a div :)
+
+@mixin writeNewButton(){
+  width: 5rem;
+  height: 5rem;
+  border-radius: 5%;
+  background-color: $color-primary-butto-shadow;
 };
