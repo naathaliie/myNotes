@@ -78,6 +78,7 @@
           font-family: $font-ooohBaby-regular;
         }
       }
+/**********THE UPDATE SECTION**********/
 
       .updateNoteButton{
         @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);

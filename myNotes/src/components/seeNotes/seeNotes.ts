@@ -5,7 +5,6 @@ import { Note, updateNote } from "../../interfaces/interface";
 import { writeNote } from "../writeNotes/writeNotes";
 
 export function seeNotes(username: string) {
-  console.log("Du är inne i seeNotes funktionen");
 
   //We need this to be global in this function
   let noteID: string;
@@ -24,7 +23,7 @@ export function seeNotes(username: string) {
   backButton.innerHTML = "Tillbaka";
   seeNoteWrapper.appendChild(backButton);
 
-  //Create the writeNewNoteButton
+  //Create the writeNewNoteButton as a div
   const writeNewButton: HTMLDivElement = document.createElement("div");
   writeNewButton.classList.add("writeNewButton");
   seeNoteWrapper.appendChild(writeNewButton);
@@ -35,10 +34,14 @@ export function seeNotes(username: string) {
   thePenSymbol.src = "./src/img/Vector.png";
   writeNewButton.appendChild(thePenSymbol);
 
-  //When writeNewButton gets clicked
+  /* When click on writeNewButton
+  1: Get access to the writeNoteWrapper and make it visible
+  2:Makes the previous created elements disappear and to avoid stacking them on top of each other.
+  3:Call the writeNote-function to get the user to the "next page".*/
+
   writeNewButton.addEventListener('click', () => {
     
-      //get access to the writeNoteWrapper
+      /*1*/
       const writeNoteWrapper: HTMLDivElement =
         document.querySelector(".writeNoteWrapper");
   
@@ -46,23 +49,19 @@ export function seeNotes(username: string) {
         writeNoteWrapper.style.display = "block";
       }
   
-      //To make the previous created elements disappear and to avoid stacking them on top of each other.
+      /*2*/
       writeNoteWrapper.remove();
       seeNoteWrapper.remove();
-  
-      //Makes the seeNoteWrapper "Dissappear"
-      seeNoteWrapper.style.display = "none";
-  
+      /*3*/
       writeNote(username);
   });
 
-  /*When entering this side we want to call the function for getting the notes from the API with the username
+  /*Function for getting the notes from the API with the username is called automatically.
    We need to use .then and .catch because when you are calling a async function (API_GET) you will receive a promise right away,
    .then waits for the operation to get fullfiled */
   API_GET(username)
     .then((notes) => {
-      console.log("Hämtade anteckningar: ", notes);
-
+     
       //If the user havn´t published any notes yet
       if (notes.length === 0) {
         //Create a noNoteSection
@@ -73,7 +72,6 @@ export function seeNotes(username: string) {
       }
 
       //But if the user has published notes we will print them out one by one :)
-
       notes.forEach((note: Note, i: number) => {
         //Create the noteSection
         const noteSection: HTMLElement = document.createElement("section");
@@ -85,7 +83,7 @@ export function seeNotes(username: string) {
         theDate.classList.add("theDate", `${i}`);
         // Here I use the nullish coalescing operator (??) to provide a default value to the variable 'theDate' if 'note.createdAt' is null or undefined.
         theDate.textContent =
-          note.createdAt?.toString() ?? "Det finns inget datum";
+        note.createdAt?.toString() ?? "Det finns inget datum";
         noteSection.appendChild(theDate);
 
         //Create the div for the Title
@@ -119,31 +117,28 @@ export function seeNotes(username: string) {
 
         //Create the updateButton
         const updateNoteButton: HTMLButtonElement =
-          document.createElement("button");
+        document.createElement("button");
         updateNoteButton.classList.add("updateNoteButton", `${i}`);
         updateNoteButton.innerHTML = "Updatera";
         noteSection.appendChild(updateNoteButton);
 
         //Create the deleteButton
         const deleteButton: HTMLButtonElement =
-          document.createElement("button");
+        document.createElement("button");
         deleteButton.classList.add("deleteButton", `${i}`);
         deleteButton.innerHTML = "Ta bort";
         noteSection.appendChild(deleteButton);
 
 
 
-        /*******************UPDATE BUTTON*****************UPDATE BUTTON******************UPDATE BUTTON****************UPDATE BUTTON********************************/
+        /*******************UPDATE BUTTON*****************/
 
-        //When click on the updateButton
+        /*When click on the updateButton the note will pop-up on the screen*/
         updateNoteButton.addEventListener("click", () => {
-          /* När man klickar på updateButton vill jag att en pop-up ruta med allt innehåll från den klickade anteckningen skall poppa upp */
-          console.log("du har klickat på updatebutton");
-
+        
           //Create the updateSection
           const updateSection: HTMLElement = document.createElement("section");
           updateSection.classList.add("updateSection", `${i}`);
-          /* updateSection.innerHTML = 'Du vill uppdatera mig med unikt id: ' + note.id; */
           seeNoteWrapper.appendChild(updateSection);
 
           //Create the div for the date
@@ -175,7 +170,7 @@ export function seeNotes(username: string) {
 
           //Create the div for the heart-symbol
           const theHeartSymbol: HTMLImageElement =
-            document.createElement("img");
+          document.createElement("img");
           theHeartSymbol.classList.add("theHeartSymbol", `${i}`);
           theHeartSymbol.src = "./src/img/icon_heart.png";
           signatureDivBox.appendChild(theHeartSymbol);
@@ -188,119 +183,116 @@ export function seeNotes(username: string) {
 
           //Create the abortButton
           const abortButton: HTMLButtonElement =
-            document.createElement("button");
+          document.createElement("button");
           abortButton.classList.add("abortButton", `${i}`);
           abortButton.innerHTML = "Avbryt";
           updateSection.appendChild(abortButton);
 
           //Create the confirmButton
           const confirmButton: HTMLButtonElement =
-            document.createElement("button");
+          document.createElement("button");
           confirmButton.classList.add("confirmButton", `${i}`);
           confirmButton.innerHTML = "Ok";
           updateSection.appendChild(confirmButton);
 
 
-          /***************************************************ABORT-CONFIRM BUTTON************************************************************/
-          //Vad som skall hända när användaren klickar på avbryt
+          /*******************************ABORT-CONFIRM BUTTON*******************/
+          
+          /*When click on the abortButton the pop-up note will be removed */
           abortButton.addEventListener("click", () => {
             updateSection.remove();
           });
 
-          /***************************************************ABORT-CONFIRM BUTTON************************************************************/
 
 
-
-
-
-          /***************************************************UPDATE-CONFIRM BUTTON************************************************************/
-          //Vad som skall hända när vi klickar på okknappen
+          /*********************************UPDATE-CONFIRM BUTTON***************/
+          /*When click on the ConfirmButton
+          1:Saves all the collected info needed of the user into a object with datatype of interface Note.
+          2:Adds it to the global variable of this function.
+          3:Sends the updatednote to the API
+          4:Call the seeNoteWrapper to get the user to the "next page".
+          5:A timedelay so the api will get updated before we send the user to the "next page". */
           confirmButton.addEventListener("click", () => {
-            //Saves all the collected info needed of the user into a object with datatype of interface Note
+            /*1*/
             let updatedNote: updateNote = {
               note: updateNote.value,
             };
-            //Adds it to the global variable of this function
+            /*2*/
             noteID = note.id ?? "Inget ID";
-            //Sends the updatednote to the API
+            /*3*/
             API_PUT(updatedNote, noteID);
-
+            /*4*/
             seeNoteWrapper.remove();
-
+            /*5*/
             setTimeout(() => {
               seeNotes(username);
             }, 800);
           });
-          /***************************************************UPDATE-CONFIRM BUTTON************************************************************/
-
         });
 
-/*******************UPDATE BUTTON*****************UPDATE BUTTON******************UPDATE BUTTON****************UPDATE BUTTON********************************/
 
+        /*******************DELETE BUTTON**************/
 
-/*******************DELETE BUTTON*****************DELETE BUTTON******************DELETE BUTTON****************DELETE BUTTON********************************/
-
-        //When click on the deleteButton
+        /*When click on the deleteButton:
+        1:A confirmBox, if the user klicks ok it will be true if the user klicks avbryt it will be false.
+        2:IF= the user cliks on ok -> Adds it to the global variable of this function.
+        3:The klicked note will be deleted.
+        4:We will reset the created elements.
+        5:A timedelay so the api will get updated before we send the user to the "next page".
+        6:ELSE= Nothing happens, the user gets back a step.*/
         deleteButton.addEventListener("click", () => {
-          console.log(
-            "Du klickade på deletknappen för note nr: " +
-              `${i}. ` +
-              "Med unikt id: " +
-              note.id
-          );
-          //Call the API_DELETE function to delete the message
-
-          /* A confirmBox, if the user klicks ok it will be true if the user klicks avbryt it will be false */
+          
+          /*1*/
           const checkIfDelete = confirm(
             "Är du säker på att du vill radera din anteckning?"
           );
           if (checkIfDelete) {
-            //Adds it to the global variable of this function
+            /*2*/
             noteID = note.id ?? "Inget ID";
-            //The klicked note will be deleted
+            /*3*/
             API_DELETE(noteID);
-            //We will reset the created elements
+            /*4*/
             seeNoteWrapper.remove();
 
-            //Set a timeout so the deleted note has a chanse of being deleted
+            /*5*/
             setTimeout(() => {
               seeNotes(username);
             }, 800);
+            /*6*/
           } else {
             return;
           }
         });
-
-/*******************DELETE BUTTON*****************DELETE BUTTON******************DELETE BUTTON****************DELETE BUTTON********************************/
-
       });
     })
     .catch((error) => {
       console.error("Ett fel uppstod vid hämtning av anteckningar.");
     });
 
-/*******************GO-BACK BUTTON*****************GO-BACK  BUTTON******************GO-BACK  BUTTON****************GO-BACK  BUTTON***************************/
+/*******************GO-BACK BUTTON****************/
 
-  //When click on the backButton to go back to seeNote page
+  /*When click on the backButton:
+   1:Get access to the writeNoteWrapper and make it visible.
+   2:Removes the previous created elements to avoid stacking them on top of each other.
+   3:Makes the seeNoteWrapper "Dissappear".
+   4:Call the writeNote-function to get the user to the "next page".*/
+
   backButton.addEventListener("click", () => {
-    //get access to the writeNoteWrapper
+    /*1*/
     const writeNoteWrapper: HTMLDivElement =
       document.querySelector(".writeNoteWrapper");
-
+    
     if ((writeNoteWrapper.style.display = "none")) {
       writeNoteWrapper.style.display = "block";
     }
 
-    //To make the previous created elements disappear and to avoid stacking them on top of each other.
+    /*2*/
     writeNoteWrapper.remove();
     seeNoteWrapper.remove();
 
-    //Makes the seeNoteWrapper "Dissappear"
+    /*3*/
     seeNoteWrapper.style.display = "none";
-
+    /*4*/
     writeNote(username);
   });
-
-  /*******************GO-BACK BUTTON*****************GO-BACK  BUTTON******************GO-BACK  BUTTON****************GO-BACK  BUTTON***************************/
-
 }

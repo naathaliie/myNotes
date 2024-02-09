@@ -41,11 +41,11 @@ export function logIn() {
   /*When the user clicks on the logInButton this will happen:
   1: We want to make sure the user has typed in its username.
   2:We collect the username so we can use it(we need it to get the notes).
-  3.Call the writeNote-function to get the user to the "next page".
-  4.This "hides" the login-layout to make room for the "next page",
+  3.This "hides" the login-layout to make room for the "next page",
     Since mainEl may be null or undefined (HTMLElement | null), we need to verify its existence 
     before accessing its properties. Attempting to assign a value to a property of a null object 
-    will result in an error, thats why we need to check it with a if-statement */
+    will result in an error, thats why we need to check it with a if-statement 
+  4.Call the writeNote-function to get the user to the "next page".*/
   
     logInButton.addEventListener("click", () => {
     /*1*/
@@ -58,11 +58,12 @@ export function logIn() {
     let userName = userNameInput.value;
 
     /*3*/
-    writeNote(userName);
-
-    /*4*/
     if (mainEl !== null && mainEl !== undefined) {
       mainWrapper.style.display = "none";
     }
+
+    /*4*/
+    writeNote(userName);
   });
 }
+

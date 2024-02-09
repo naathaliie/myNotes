@@ -9,70 +9,61 @@
     align-items: center;
     gap: 2rem;
     margin: 2rem;
-    
-    .exitButton{
-      @include mainButton($color-primary-remove-button, $color-primary-remove-button-shadow);
+
+    .exitButton {
+      @include mainButton($color-primary-remove-button,$color-primary-remove-button-shadow);
       position: absolute;
       top: 15%;
       left: 80%;
       transform: translate(-50%, -50%);
-
-    
     }
 
     .seePreviousButton {
-      @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);
+      @include mainButton($color-primary-aquaGreen,$color-primary-butto-shadow,true);
     }
-
 
     .noteBox {
       background-color: rgba(245, 245, 245, 0.373);
       border: 2px solid $color-primary-aquaGreen;
-        border-radius: 4px;
-        min-width: 15rem;
-        min-height: 10rem;
-        padding: 3%;
+      border-radius: 4px;
+      min-width: 15rem;
+      min-height: 10rem;
+      padding: 3%;
 
-            .currentDate{
-                color: grey;
-                margin-bottom: 2%;
-                font-family: $font-poppins-bold;
-            }
+      .currentDate {
+        color: grey;
+        margin-bottom: 2%;
+        font-family: $font-poppins-bold;
+      }
 
-            .titleInput{
-             border-style: none;
-             margin-bottom: 0.3rem;
-            }
+      .titleInput {
+        border-style: none;
+        margin-bottom: 0.3rem;
+      }
 
-            .titleInput::placeholder{
-                font-family: $font-poppins-bold;
-                color: black;
-            }
+      .titleInput::placeholder {
+        font-family: $font-poppins-bold;
+        color: black;
+      }
 
-            .noteInput{
-                border-color: $color-primary-aquaGreen;
-                
-            }
+      .noteInput {
+        border-color: $color-primary-aquaGreen;
+      }
 
-            .noteInput::placeholder{
-                font-family: $font-poppins-thinItalic;
-                font-style: italic;
-            }
+      .noteInput::placeholder {
+        font-family: $font-poppins-thinItalic;
+        font-style: italic;
+      }
     }
 
     .publishButton {
-        @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);
-    
-        
-      }
-      
-      .seeNotesButton{
-        @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);
-        //It makes the button show upp a litte bit further down than the publishbutton so the hover-effect doesn´t start right away
-        margin-top: 1rem;
-      }
+      @include mainButton($color-primary-aquaGreen,$color-primary-butto-shadow,true);
+    }
 
+    .seeNotesButton {
+      @include mainButton($color-primary-aquaGreen,$color-primary-butto-shadow,true);
+      //It makes the button show upp a litte bit further down than the publishbutton so the hover-effect doesn´t start right away
+      margin-top: 1rem;
+    }
   }
 }
-
-

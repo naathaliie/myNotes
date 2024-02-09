@@ -18,11 +18,6 @@ export function writeNote(username: string) {
   exitButton.innerHTML = "Logga ut";
   writeNoteWrapper?.appendChild(exitButton);
 
-  //when click on exitButton
-  exitButton.addEventListener("click", () => {
-    location.reload();
-  });
-
   //Create the seePrevious Button
   const seePreviousButton: HTMLButtonElement = document.createElement("button");
   seePreviousButton.classList.add("seePreviousButton");
@@ -70,70 +65,73 @@ export function writeNote(username: string) {
   publishButton.innerHTML = "Publicera";
   writeNoteWrapper?.appendChild(publishButton);
 
+  //when click on exitButton
+  exitButton.addEventListener("click", () => {
+    location.reload();
+  });
 
-  //When click on seePreviousButton
-  seePreviousButton.addEventListener("click", async () => {
-    /* To hide the writeNote "page":
-        Since mainEl may be null or undefined (HTMLElement | null), we need to verify its existence 
-        before accessing its properties. Attempting to assign a value to a property of a null object 
-        will result in an error, thats why we need to check it with a if-statement */
+
+  /*When click on seePreviousButton:
+  "Hides" the login-layout to make room for the "next page".
+  Call the seeNote-function to get the user to the "next page".*/
+
+  seePreviousButton.addEventListener("click", async () => {  
     if (mainEl !== null && mainEl !== undefined) {
       writeNoteWrapper.style.display = "none";
     }
 
-    /* writeNoteWrapper.remove(); */
-
     seeNotes(username);
   });
 
-  //When click on publishButton
-  /* När man klickar på publicera skall nedan pushas in i api:et */
-  /*Måste skickas med:
-      1:dagens datum 
-      2:Titel
-      3:Anteckning
-      4:username*/
-  publishButton.addEventListener("click", async () => {
-    /*If the user havn´t typed in a Title and/or a note an alertbox will appear
+  
+  /*When click on publishButton:
+   1:If the user havn´t typed in a Title and/or a note an alertbox will appear
         the .trim() is a built in method that delets any blankspaces in the beginning or end (if there are any)
-        This is because we want to avoid try to push anything "empty" to the API*/
+        This is because we want to avoid try to push anything "empty" to the API.
+    2:Saves all the collected info needed from the user into a object with datatype of interface Note
+    3:Sends the collected info to the API.
+    4:Removes the publishButton to make room for the seeNotesButton
+    5:Creates the seeNotesButton.
+    6:When click on the seeNotesButton
+    7:Same as 1.
+    8:Call the seeNote-function to get the user to the "next page".*/
+
+  
+  publishButton.addEventListener("click", async () => {
+   /*1*/
     if (titleInput.value.trim() === "" || noteInput.value.trim() === "") {
       alert(
         "Du måste fylla i en Titel och en Anteckning för att kunna publicera"
       );
       return; // The return; will throw you back before the if everytime you end up inside it (everytime either the titleinput or noteinput is empty)
     }
-    //Saves all the collected info needed of the user into a object with datatype of interface Note
+    /*2*/
     let noteInfo: Note = {
       username: username,
       title: titleInput.value,
       note: noteInput.value,
-      /* createdAt: currentDate.innerHTML, */ //VARFÖR FUNGERAR DET INTE??? FINNS ÄVEN I SEENOTES NÄR MAN UPPDATERAR
     };
 
-    //Functions we want to call
-    API_POST(noteInfo); //Sends the note to the API
+    /*3*/
+    API_POST(noteInfo);
 
-    //The publishButton will dissappear
+    /*4*/
     publishButton.remove();
 
-    //knapp för att se sina notes
-
+    /*5*/
     const seeNotesButton: HTMLButtonElement = document.createElement("button");
     seeNotesButton.classList.add("seeNotesButton");
     seeNotesButton.innerHTML = "Se dina anteckningar";
     writeNoteWrapper.appendChild(seeNotesButton);
 
+    /*6*/
     seeNotesButton.addEventListener("click", () => {
-      /* To hide the writeNote "page":
-        Since mainEl may be null or undefined (HTMLElement | null), we need to verify its existence 
-        before accessing its properties. Attempting to assign a value to a property of a null object 
-        will result in an error, thats why we need to check it with a if-statement */
+      /*7*/
       if (mainEl !== null && mainEl !== undefined) {
         writeNoteWrapper.style.display = "none";
       }
-
-      seeNotes(username); //goes to the seenotes page
+      /*8*/
+      seeNotes(username);
     });
   });
 }

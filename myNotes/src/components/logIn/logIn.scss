@@ -34,7 +34,7 @@
     }
 
     .logInButton {
-      @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow);
+      @include mainButton($color-primary-aquaGreen, $color-primary-butto-shadow, true);
     }
   }
 }
