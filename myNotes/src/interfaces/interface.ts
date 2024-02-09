@@ -11,6 +11,5 @@ export interface Note{
 //Interface for PUT (update) a note in the api
 //Kanske skall lägga till att vi även kan ändra titel??
 export interface updateNote{
-    title: string;
     note: string;
 }
